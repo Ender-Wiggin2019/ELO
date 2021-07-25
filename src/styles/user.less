@@ -1,0 +1,307 @@
+.register-block{
+    min-width: 320px;
+    margin: 0 auto;
+    height: 201px;
+}
+.register-input{
+    margin-top: 20px;
+}
+.register-action{
+    margin: 20px;
+}
+.btn-margin{
+    margin-left: 20px;
+}
+.register-a{
+    margin-left: 20px;
+}
+.user-name{
+    background-color: #ddd;
+    color: #303030;
+    border-radius: 0.6rem;
+    padding: 0 10px;
+}
+
+.exec-block{
+    margin: 0 auto;
+    height: auto;
+}
+.exec-input{
+    color: #020202;
+    width: 800px;
+    max-width: 800px;
+}
+.donate-screen {
+    width: 700px;
+    margin: 0 auto;
+}
+.donate-screen-links{
+    margin: 0 auto;
+    width: 695px;
+}
+#mc {
+    background: #222;
+    border-bottom: 0.05em solid #555;
+    font-weight: bold;
+    padding-top: 1em;
+    text-align: center;
+
+    a:link, a:visited, a:active{
+        text-decoration:none;color:#B39F67
+    }
+    a:hover{
+        text-decoration:underline;color:#D4C8A0
+    }
+}
+
+.player_home_block {
+    .player_exited{
+        background-color: #fff;
+        filter: Alpha(Opacity=60);
+        opacity: 0.6;
+        text-shadow: none;
+    }
+    
+    .player_name_cont.player_exited {
+        .player_number {
+            text-shadow:none;
+        }
+    }
+}
+
+.sidebar_icon--donate{
+    background-image: url(assets/preferences_donate.png);
+    .deck-size {
+        margin: 33px 0 0 0;
+    }
+}
+
+.sidebar_icon--resign {
+    background-image: url(assets/preferences_resign.png);
+    .deck-size {
+        margin: 33px 0 0 0;
+    }
+}
+
+.resign_panel {
+    box-shadow: 0 3px 5px 3px rgba(0, 0, 0, 0.5); 
+    border-radius: 10px 10px 10px 10px;
+    padding: 50px 15px 25px 20px;
+    display: inline-block;
+    position: absolute; 
+    white-space: nowrap; 
+    background: #000000; 
+    left: 53px;
+    top: -150px;
+
+    .preferences_panel_item{
+        width: 440px;
+        height: 255px;
+    }
+}
+
+
+#users-overview{
+  .form-input{
+    max-width: 200px;
+    display:  inline;
+  }
+}
+
+#app{
+    min-height: 100%;
+}
+
+.main-container{
+    min-height: 100%;
+}
+
+#player-home{
+    min-height: 100%;
+}
+
+.topmost-donate {
+    margin: 0px;
+    padding-bottom: 40px;
+    background: url(assets/stars.jpg);
+    min-height: 100%;
+}
+
+/**
+player_home.css
+*/
+@player_gray: gray;
+@player_gray_bg: rgba(128, 128, 128, 0.7);
+.player_bg_color_gray {
+    background-color: @player_gray;
+}
+.player_overview_bg_color_gray {
+    background-color: @player_gray_bg;
+}
+
+/**
+players_overview.css 双公司名称显示调整
+*/
+.players-overview{
+    .player-info-top{
+        display: flex;
+        margin: 10px 0 -10px 0;
+    }
+    .player-info-dcorp {
+        border-radius: 0 8px 8px 8px;
+    }
+    .player-corp-left{
+        font-size: 18px;
+        padding: 0px 18px;
+        margin-right: 6px;
+        line-height: 32px;
+        border-radius: 8px 0px 0px 0px;
+        height: 32px;
+        color: #ccc;
+        font-family: 'Prototype';
+    }
+    
+    .player-corp-right{
+        font-size: 18px;
+        padding: 0px 18px;
+        margin-right: 6px;
+        line-height: 32px;
+        border-radius: 0px  8px 0px 0px;
+        height: 32px;
+        color: #ccc;
+        font-family: 'Prototype';
+    }
+}
+
+
+/**
+创建游戏界面的label框禁用
+*/
+.create-game-page-column label.forbidden{
+    color: #383838;
+    background-color: #0a0a0a;
+    a {
+        color: #383838;
+    }
+} 
+
+/**
+game home 玩家名字
+*/
+.player_name {
+    color: #ccc;
+    text-shadow: 1px 1px 1px #222, -1px -1px 2px #666;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin: 0px 12px;
+}
+.player-info-name{
+    .icon_vip1{
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        box-shadow: 0 0 4px rgba(0,0,0,0.3);
+        vertical-align: -2px;
+        display: inline-block;
+        background-image: url(assets/qrcode/vip_icon.png);
+        background-repeat: no-repeat;
+        background-position: 0px -0px;
+    }
+    .icon_vip2{
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        box-shadow: 0 0 4px rgba(0,0,0,0.3);
+        vertical-align: -2px;
+        display: inline-block;
+        background-image: url(assets/qrcode/vip_icon.png);
+        background-repeat: no-repeat;
+        background-position: 0px -25px;
+    }
+}
+
+
+
+
+/**
+qrcode
+*/
+
+.bottom_tools{position:fixed;z-index:1070;right:40px;bottom:40px;}
+.bottom_tools>*{font:0/0 a;display:block;margin-top:5px;color:transparent;border:0;background-color:transparent;text-shadow:none}
+
+.qr_imgwx{position:absolute;top:-430px;left:-370px;}
+
+.qr_wx{width: 34px;height: 32px;background-image:url(./assets/qrcode/qr_icon.png);background-position: 46px 0;cursor:pointer;}
+.qr_wx:hover {width: 34px;height: 32px;background-image: url(./assets/qrcode/qr_icon.png);background-position: 0 0px;}
+
+.qr_imgqq{position:absolute;top:-430px;left:-370px;}
+.qr_qq{width: 34px;height: 33px;background-image:url(./assets/qrcode/qr_icon.png);background-position:46px 40px;cursor:pointer;}
+.qr_qq:hover {width: 34px;height: 33px;background-image: url(./assets/qrcode/qr_icon.png);background-position: 1px 40px;}
+ 
+.qrhide {
+  animation: anim1 0.5s;
+  animation-fill-mode: forwards;
+}
+.qrshow {
+  animation: anim2 0.5s;
+  animation-fill-mode: forwards;
+}
+@keyframes anim1 {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+	display:none;
+  }
+}
+@keyframes anim2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+} 
+.hide{
+    display: none;
+}
+
+/* award */
+.award-chaos{
+    background: url(assets/eros/award-chaos.png) no-repeat;
+    position: absolute;
+    height: 53px;
+    width: 115px;
+    background-size: 100%;
+    z-index: 10;
+    left: -36px;
+    top: 6px;
+}
+.award-starcore{
+    background: url(assets/eros/award-starcore.png) no-repeat;
+    position: absolute;
+    height: 53px;
+    width: 115px;
+    background-size: 100%;
+    left: 62px;
+    top: 239px;
+}
+.award-incite{
+    background: url(assets/eros/award-incite.png) no-repeat;
+    position: absolute;
+    height: 53px;
+    width: 115px;
+    background-size: 100%;
+    left: 80px;
+    top: 6px;
+}
+
+/** 帮助指引 */
+.help-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
