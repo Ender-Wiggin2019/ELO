@@ -1,112 +1,33 @@
-# <a name="README"> Terraforming Mars Open-source
+# 天梯模式
 
-<div>
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_corporateEra.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_venus.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_colonies.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_turmoil.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_prelude.png">
-  &nbsp;&nbsp;&nbsp;
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_ares.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_community.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_promo.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_agendas.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_themoon.png">
-</div>
+## 规则简述
 
-This is an open-source online implementation of the great board game Terraforming mars. **It is not affiliated
-with FryxGames, Asmodee Digital or Steam in any way.**
+* 以一月为赛季基本单位，赛季结束后分数会继承部分分数到下一赛季
+* beta版本默认4人局+官方扩全选，其余设置可由玩家协商设置
+* c房规则与一般游戏相同，但是当玩家加入房间后需全部坐下方可开始游戏，系统会进行匿名处理
+* 比赛过程中每名玩家总限时2小时，每一动限时30分数，如超时会弹出是否放弃游戏选项，根据多数意见评判，如均选择放弃玩家会获得一定补偿分数，超时者失去额外分数作为惩罚。
+* 比赛中禁止体退。
+* 比赛结束后会根据elo修正各位玩家的分数。
+* 网站会有额外界面展示当前天梯前10名玩家。
+* 第一赛季积分到达给定数值会获得eros扩展电子版卡牌奖励，赛季结算前十名会获得vip15天奖励，第一名会获得一张卡牌设计权。
 
-**Buy The Board Game**
+## 功能实现
 
-The board game is great and this repository highly recommends [purchasing it](https://www.amazon.com/Stronghold-Games-6005SG-Terraforming-Board/dp/B01GSYA4K2) for personal use.
+### db设计
 
-## ⬤ I want to join the community!
-[Join us over on Discord!](https://discord.gg/VR8TbrD).
+* 在用户db中额外增加elo这一字段。
+* 增加一个新db用于存放玩家elo排名（方便在网页界面展示）
 
-## ⬤ I want to play!
-There's a demo instance at https://terraforming-mars.herokuapp.com/. It's generally reliable, but read more below.
+### 创建游戏界面设计
 
-There's also this excellent
-[YouTube playlist](https://youtube.com/playlist?list=PLCGE78n9vCqhhmRe9YCrRh2GLNMPB_3j1) focused on tutorials custom for this app.
+* 在游戏选项中新增`天梯模式`按钮。
+* 点击后会`disable()`部分游戏选项。
+* 创建无需输入玩家名称和颜色，会弹出一个界面等待玩家加入。
+* 玩家点击`sit down`坐下并进入一个随机id的游戏界面。
 
-NOTE: This demo site is restarted daily. A multiplayer game will remain available for 10 days, after which it will be flushed from the database.
-Unfinished solo games are flushed after one day. We continue to make stability and scalability improvements as in step with growth and popularity,
-but to make sure your game remains, we highly recommended to host your own web server.
+### ELO算法设计
 
-## ⬤ I want to learn how to play
-There are far too many good tutorials online.
+* 初始分数设为1500，即`user.elo = 1500`。
+* 一局游戏后，按照4人elo分数修正，调用`user.modifyELO()` 方法
+* 将修改结果写入db（user和elo两个database）
 
-## ⬤ I want to run a copy of the server locally
-Check out our [Local setup wiki page](https://github.com/bafolts/terraforming-mars/wiki/Local-Setup)
-
-Honestly, it's really simple.
-
-## ⬤ I want to run a copy of the server on Heroku
-Check out our [Heroku setup wiki page](https://github.com/bafolts/terraforming-mars/wiki/Heroku-Setup)
-
-(Good choice. A free Heroku account will satisfy most needs, and will take five minutes to set up. This is
-our preferred recommendation for online hosting.)
-
-## ⬤ I want to run a copy of the server on Docker
-Check out our [Docker setup wiki page](https://github.com/bafolts/terraforming-mars/wiki/Docker-Setup)
-
-## ⬤ I want to report a bug or feature request
-Add it to our [issues tab](https://github.com/bafolts/terraforming-mars/issues/new).
-
-## ⬤ I want to win!
-Me too, pal. Me too.
-
-## ✨ Contributors ✨
-
-Thanks goes to these wonderful people:
-
-<table border="0">
-  <tdata>
-    <tr>
-      <td><img src="https://avatars1.githubusercontent.com/u/2707843?v=3" width="50px;" alt=""/></td>
-      <td><a href="https://github.com/bafolts"><b>Brian Folts</b></a>: All the things</td>
-    </tr>
-    <tr>
-       <td><img src="https://avatars1.githubusercontent.com/u/56086992?v=3" width="50px;" alt=""/></td>
-       <td><a href="https://github.com/vincentneko"><b>Vincent Moreau</b></a>: Venus, Prelude, Hellas & Elysium, Colonies, Turmoil</td>
-    </tr>
-    <tr>
-      <td><img src="https://avatars2.githubusercontent.com/u/394311?v=3" width="50px;" alt=""/></td>
-      <td><a href="https://github.com/alrusdi"><b>alrusdi</b></a>: Front End</td>
-    </tr>
-    <tr>
-      <td><img src="https://avatars3.githubusercontent.com/u/6917565?s=460&v=4" width="50px;" alt=""/></td>
-      <td><a href="https://github.com/ssimeonoff"><b>Simeon Simeonov</b></a>: UX, cards and Colonies design</td>
-    </tr>
-    <tr>
-      <td><img src="https://avatars0.githubusercontent.com/u/806950?v=3" width="50px;" alt=""/></td>
-      <td><b><a href="https://github.com/pierrehilbert">Pierre Hilbert</b></a>: Turmoil and helps with the things</td>
-    </tr>
-    <tr>
-      <td><img src="https://avatars1.githubusercontent.com/u/2408094?s=460&v=4" width="50px;" alt=""/></td>
-      <td><b><a href="https://github.com/nwai90">nwai90</b></a>: Community and Political Agendas fan-made expansions, and helps with the things</td>
-    </tr>
-    <tr>
-      <td><img src="https://avatars1.githubusercontent.com/u/10995145?s=460&v=4" width="50px;" alt=""/></td>
-      <td><b><a href="https://github.com/pocc">Pocc</b></a>: He did that one thing one time</td>
-    </tr>
-    <tr>
-      <td><img src="https://avatars1.githubusercontent.com/u/413481?s=460&v=4" width="50px;" alt=""/></td>
-      <td><b><a href="https://github.com/kberg">Robert Konigsberg</b></a>: Ares fan expansion, The Moon fan expansion, infrastructure cleanup, code reviews, two opinions too many.</a> </td>
-    </tr>
-    <tr>
-      <td><img src="https://avatars.githubusercontent.com/u/836179?s=460&v=4" width="50px;" alt=""/></td>
-      <td><a href="https://github.com/chosta"><b>chosta</b></a>: Front end and back end</a> </td>
-    </tr>
-    <tr>
-      <td><img src="https://avatars.githubusercontent.com/u/5318258?s=460&v=4" width="50px;" alt=""/><br />
-      <td><a href="https://github.com/Lynesth"><b>Lynesth</b></a>: Help with the things</a> </td>
-    </tr>
-  </tdata>
-</table>
-
-
-## LICENSE
-
-GPLv3
