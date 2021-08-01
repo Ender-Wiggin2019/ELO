@@ -54,6 +54,8 @@ export interface CreateGameModel {
     aresExtension: boolean;
     politicalAgendasExtension: AgendaStyle;
     moonExpansion: boolean;
+    // elo mode 
+    eloMode: boolean;
     undoOption: boolean;
     showTimers: boolean;
     fastModeOption: boolean;
@@ -153,6 +155,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       aresExtension: false,
       politicalAgendasExtension: AgendaStyle.STANDARD,
       moonExpansion: false,
+      eloMode: false,
       undoOption: true,
       showTimers: true,
       fastModeOption: true,
@@ -401,7 +404,11 @@ export const CreateGameForm = Vue.component('create-game-form', {
       // Set player name automatically if not entered
       const isSoloMode = component.playersCount === 1;
 
+      // elo mode, need to map user name to random id
       component.players.forEach((player) => {
+        if (eloMode === true) {
+          player.name = '巅峰火星人'+ String(Math.random());
+        }
         if (player.name === '') {
           if (isSoloMode) {
             const userName = PreferencesManager.load('userName');
@@ -444,6 +451,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const aresExtension = component.aresExtension;
       const politicalAgendasExtension = this.politicalAgendasExtension;
       const moonExpansion = component.moonExpansion;
+      const eloMode = component.eloMode;
       const undoOption = component.undoOption;
       const showTimers = component.showTimers;
       const fastModeOption = component.fastModeOption;
@@ -506,6 +514,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         aresExtension: aresExtension,
         politicalAgendasExtension: politicalAgendasExtension,
         moonExpansion: moonExpansion,
+        eloMode: eloMode,
         undoOption,
         showTimers,
         fastModeOption,
@@ -740,6 +749,10 @@ export const CreateGameForm = Vue.component('create-game-form', {
                             </label>
                             </template>
 
+                            <input type="checkbox" v-model="eloMode" id="elo-checkbox">
+                            <label for="elo-checkbox">
+                                <span v-i18n>ElO Mode</span>&nbsp;
+                            </label>
                             <input type="checkbox" v-model="undoOption" id="undo-checkbox">
                             <label for="undo-checkbox">
                                 <span v-i18n>Allow undo</span>&nbsp;
