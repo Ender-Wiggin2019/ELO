@@ -527,6 +527,7 @@ export class Game implements ISerializable<SerializedGame> {
     return this.soloMode;
   }
 
+  // elo mode, add a public method
   public isEloMode() :boolean {
     return this.eloMode;
   }

@@ -8,6 +8,7 @@ import {BoardName} from '../boards/BoardName';
 import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 import {RandomMAOptionType} from '../RandomMAOptionType';
 import {Multiset} from '../utils/Multiset';
+import { EvalDevToolModulePlugin } from 'webpack';
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url === undefined) {
@@ -92,6 +93,7 @@ function calc(params: URLSearchParams): string {
 function simpleGameOptions(): GameOptions {
   return {
     clonedGamedId: undefined,
+    eloMode: false,
     undoOption: false,
     showTimers: false,
     fastModeOption: false,
