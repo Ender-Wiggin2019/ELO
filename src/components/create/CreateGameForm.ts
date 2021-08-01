@@ -54,7 +54,7 @@ export interface CreateGameModel {
     aresExtension: boolean;
     politicalAgendasExtension: AgendaStyle;
     moonExpansion: boolean;
-    // elo mode 
+    // elo mode
     eloMode: boolean;
     undoOption: boolean;
     showTimers: boolean;

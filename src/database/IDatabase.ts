@@ -136,7 +136,7 @@ export interface IDatabase {
     cleanSaves(game_id: GameId, save_id: number): void;
     cleanGame(game_id: string): void;
     cleanGameSave(game_id: string, save_id: number): void;
-    saveUser(id: string, name: string, password: string, elo: number, prop: string): void ;
+    saveUser(id: string, name: string, password: string, prop: string): void ;
     getUsers(cb:(err: any, allUsers:Array<User>)=> void): void ;
     refresh(): void ;
 

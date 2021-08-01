@@ -9,6 +9,7 @@ export class User {
     public vipDate : string = '2021-01-01';
     public accessDate : string = '2021-01-01';
     public showhandcards : boolean = false;
+    public elo : number = 1500;
 
     constructor(
         public name: string,
@@ -63,6 +64,14 @@ export class User {
         return 1;
       }
       return 0;
+    }
+
+    public getElo(): number {
+      return this.elo;
+    }
+
+    public modifyElo(number: number) {
+      this.elo += number;
     }
 }
 

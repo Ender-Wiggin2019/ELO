@@ -198,9 +198,9 @@ export class SQLite implements IDatabase {
       });
     }
   }
-  saveUser(id: string, name: string, password: string, elo: number, prop: string): void {
+  saveUser(id: string, name: string, password: string, prop: string): void {
     // Insert user
-    this.db.run('INSERT INTO users(id, name, password, elo, prop) VALUES(?, ?, ?, ?, ?)', [id, name, password, elo, prop], function(err: { message: any; }) {
+    this.db.run('INSERT INTO users(id, name, password, elo, prop) VALUES(?, ?, ?, ?, ?)', [id, name, password, prop], function(err: { message: any; }) {
       if (err) {
         return console.error(err);
       }

@@ -196,7 +196,7 @@ export class Game implements ISerializable<SerializedGame> {
   public board: Board;
   public soloMode: boolean = false;
   public heatFor: boolean = false;
-;
+
   public breakthrough: boolean = false;;
   public createtime :string = getDate();
   public updatetime :string = getDate();
