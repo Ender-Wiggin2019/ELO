@@ -187,6 +187,7 @@ export function register(req: http.IncomingMessage, res: http.ServerResponse): v
     try {
       const userReq = JSON.parse(body);
       const userId = generateRandomId('');
+      // elo mode
       const userName: string = userReq.userName ? userReq.userName.trim().toLowerCase() : '';
       const password: string = userReq.password ? userReq.password.trim().toLowerCase() : '';
       if (userName === undefined || userName.length <= 1) {

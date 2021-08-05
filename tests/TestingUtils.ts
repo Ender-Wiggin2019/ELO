@@ -54,6 +54,7 @@ export class TestingUtils {
       promoCardsOption: false,
       erosCardsOption: false,
       communityCardsOption: false,
+      eloMode: false,
       undoOption: false,
       showTimers: false,
       startingCorporations: 2,

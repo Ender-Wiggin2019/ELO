@@ -115,3 +115,4 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
         </div>
     `,
 });
+// ELO mode hook

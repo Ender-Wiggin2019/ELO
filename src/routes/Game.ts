@@ -70,6 +70,7 @@ export class GameHandler extends Handler {
           boardName: gameReq.board,
           clonedGamedId: gameReq.clonedGamedId,
 
+          eloMode: gameReq.eloMode,
           undoOption: gameReq.undoOption,
           showTimers: gameReq.showTimers,
           fastModeOption: gameReq.fastModeOption,

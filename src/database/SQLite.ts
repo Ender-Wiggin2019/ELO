@@ -20,7 +20,9 @@ export class SQLite implements IDatabase {
     }
     this.db = new sqlite3.Database(dbPath);
     this.db.run('CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, status text default \'running\',createtime timestamp default (datetime(CURRENT_TIMESTAMP,\'localtime\')), PRIMARY KEY (game_id, save_id))');
-    this.db.run('CREATE TABLE IF NOT EXISTS \'users\'(\'id\'  varchar NOT NULL,\'name\'  varchar NOT NULL,\'password\'  varchar NOT NULL,\'prop\' varchar,\'createtime\'  timestamp DEFAULT (datetime(CURRENT_TIMESTAMP,\'localtime\')),PRIMARY KEY (\'id\'))');
+    // elo mode
+    this.db.run('CREATE TABLE IF NOT EXISTS \'users\'(\'id\'  varchar NOT NULL,\'name\'  varchar NOT NULL,\'password\'  varchar NOT NULL,\'elo\'  integer NOT NULL,\'prop\' varchar,\'createtime\'  timestamp DEFAULT (datetime(CURRENT_TIMESTAMP,\'localtime\')),PRIMARY KEY (\'id\'))');
+    this.db.run('CREATE TABLE IF NOT EXISTS elo_demo(user_id varchar NOT NULL, elo integer NOT NULL),PRIMARY KEY (user_id))');
     this.db.run('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text,createtime timestamp default (datetime(CURRENT_TIMESTAMP,\'localtime\')), PRIMARY KEY (game_id))');
   }
 
@@ -198,7 +200,7 @@ export class SQLite implements IDatabase {
   }
   saveUser(id: string, name: string, password: string, prop: string): void {
     // Insert user
-    this.db.run('INSERT INTO users(id, name, password, prop) VALUES(?, ?, ?, ?)', [id, name, password, prop], function(err: { message: any; }) {
+    this.db.run('INSERT INTO users(id, name, password, elo, prop) VALUES(?, ?, ?, ?, ?)', [id, name, password, prop], function(err: { message: any; }) {
       if (err) {
         return console.error(err);
       }

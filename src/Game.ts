@@ -95,6 +95,8 @@ export interface GameOptions {
   clonedGamedId: GameId | undefined;
 
   // Configuration
+  // elo mode
+  eloMode: boolean;
   undoOption: boolean;
   showTimers: boolean;
   fastModeOption: boolean;
@@ -165,6 +167,8 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   soloTR: false,
   startingCorporations: 2,
   turmoilExtension: false,
+  // elo mode
+  eloMode: false,
   undoOption: false,
   venusNextExtension: false,
   heatFor: false,
@@ -175,6 +179,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
 export class Game implements ISerializable<SerializedGame> {
   // Game-level data
   public exitedPlayers: Array<Player> = [];// 体退玩家list 必须放在第一位 避免数据库序列化丢失数据
+  public eloMode!: boolean;
   public loadState : string = LoadState.HALFLOADED;
   public lastSaveId: number = 0;
   private clonedGamedId: string | undefined;
@@ -190,7 +195,8 @@ export class Game implements ISerializable<SerializedGame> {
   public dealer: Dealer;
   public board: Board;
   public soloMode: boolean = false;
-  public heatFor: boolean = false;;
+  public heatFor: boolean = false;
+
   public breakthrough: boolean = false;;
   public createtime :string = getDate();
   public updatetime :string = getDate();
@@ -305,6 +311,15 @@ export class Game implements ISerializable<SerializedGame> {
       players[0].terraformRatingAtGenerationStart = 14;
     }
     game.spectatorId = spectatorId;
+    // elo mode, initialize official expansions
+    if (gameOptions.eloMode) {
+      gameOptions.coloniesExtension = true;
+      gameOptions.venusNextExtension = true;
+      gameOptions.preludeExtension = true;
+      gameOptions.turmoilExtension = true;
+      gameOptions.corporateEra = true;
+      gameOptions.initialDraftVariant = true;
+    }
     // Initialize Ares data
     if (gameOptions.aresExtension) {
       game.aresData = AresSetup.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
@@ -521,6 +536,10 @@ export class Game implements ISerializable<SerializedGame> {
     return this.soloMode;
   }
 
+  // elo mode, add a public method
+  public isEloMode() :boolean {
+    return this.eloMode;
+  }
   // Function to retrieve a player by it's id
   public getPlayerById(id: string): Player {
     let player = this.players.find((p) => p.id === id);

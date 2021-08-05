@@ -92,6 +92,7 @@ function calc(params: URLSearchParams): string {
 function simpleGameOptions(): GameOptions {
   return {
     clonedGamedId: undefined,
+    eloMode: false,
     undoOption: false,
     showTimers: false,
     fastModeOption: false,
