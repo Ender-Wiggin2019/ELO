@@ -311,6 +311,15 @@ export class Game implements ISerializable<SerializedGame> {
       players[0].terraformRatingAtGenerationStart = 14;
     }
     game.spectatorId = spectatorId;
+    // elo mode, initialize official expansions
+    if (gameOptions.eloMode) {
+      gameOptions.coloniesExtension = true;
+      gameOptions.venusNextExtension = true;
+      gameOptions.preludeExtension = true;
+      gameOptions.turmoilExtension = true;
+      gameOptions.corporateEra = true;
+      gameOptions.initialDraftVariant = true;
+    }
     // Initialize Ares data
     if (gameOptions.aresExtension) {
       game.aresData = AresSetup.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
